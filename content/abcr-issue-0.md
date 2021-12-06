@@ -1,5 +1,5 @@
 +++
-title = "A better cargo-breaking - Issue 0: Humble Beginning"
+title = "A better cargo-readme - Issue 0: Humble Beginning"
 date = 2021-12-06
 +++
 
