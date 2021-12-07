@@ -205,17 +205,16 @@ The JSON document follows a specific structure defined in the `rustdoc_json_type
 
 ## Extracting the crate-level documentation
 
-After a few minutes of diving in the data structures, we can see that all the items that are reachable from the crate are located in the [`index`] field. This field is a JSON dictionary whose keys are compiler-generated [`Id`]s and values are metadata of the reachable items. Additionally, there is a [`root`]
-field, which tells us which key in the index map will give us the documentation for the crate's root module.
+After a few minutes of diving in the data structures, we can see that all the items that are reachable from the crate are located in the [`index`] field. This field is a JSON dictionary whose keys are compiler-generated [`Id`]s and values are metadata of the reachable items. Additionally, there is a [`root`] field, which tells us which key in the index map will give us the documentation for the crate's root module.
 
 Let's try to write a command which extracts the crate-level documentation using `jq`:
 
-[`id`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc_json_types/struct.Id.html
+[`Id`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc_json_types/struct.Id.html
 [`root`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc_json_types/struct.Crate.html#structfield.root
 [`index`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc_json_types/struct.Crate.html#structfield.index
 
 ```
-$ cat target/doc/abcr_step0.json | jq '.root as $root | {docs: .index[$root].docs}'
+$ cat target/doc/abcr_step0.json | jq '{docs: .index[.root].docs}'
 {
   "docs": "# My crate\n\nThe [`Cow`] says moo 🐮\n\n```TOML\n[dependencies]\nabcr_step0 = \"0.1.0\"\n```\n\nHere's some crate-level documentation"
 }
@@ -231,7 +230,7 @@ We did it! We managed to extract the crate documentation from the rustdoc-genera
 [`links`]: https://doc.rust-lang.org/nightly/nightly-rustc/rustdoc_json_types/struct.Item.html#structfield.links
 
 ```
-$ cat target/doc/abcr_step0.json | jq '.root as $root | { docs: .index[$root].docs, links: .index[$root].links }'
+$ cat target/doc/abcr_step0.json | jq '{ docs: .index[.root].docs, links: .index[.root].links }'
 {
   "docs": "# My crate\n\n```TOML\n[dependencies]\nabcr_step0 = \"0.1.0\"\n```\n\nHere's some crate-level documentation\n\nHere's a link to [`Cow`].",
   "links": {
