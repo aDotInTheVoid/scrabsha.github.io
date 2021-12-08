@@ -1,6 +1,7 @@
 +++
 title = "A better cargo-readme - Issue 0: Humble Beginning"
 date = 2021-12-06
+updated = 2021-12-08
 +++
 
 # Introduction
