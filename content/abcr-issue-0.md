@@ -268,4 +268,8 @@ This issue was reviewed by volunteers who gave me a lot of feedback. They are, i
   - [Natsukoh](https://twitter.com/natsukoow),
   - [Yozhgoor 🦀](https://twitter.com/yozhgoor).
 
+Initial release of the blogpost used a hardcoded `id` to retrieve the crate-level documentation. [@aDotInTheVoid] suggested to use the `root` field instead. Thanks!
+
+[@aDotInTheVoid]: https://github.com/aDotInTheVoid
+
 If you're interested in reviewing the next articles or implementation, don't hesitate to message me on Twitter. I gladly welcome any kind of constructive feedback.
